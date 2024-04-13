@@ -1,12 +1,24 @@
+"""
+    This is the main file of the game. It bootstrap the backend and begins a Flask server that
+    serves content. It also sets up a SocketIO server that listens for incoming messages.
+
+    The main components of the backend are:
+    - Flask: A web server that serves the frontend and handles HTTP requests.
+    - SocketIO: A protocol that allows for real-time communication between the client and the server.
+
+"""
+
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO, emit
-import socket
 import json
 import data
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
+# Random secret key -- upgrade for production
+import random
+app.secret_key = ''.join(random.choice("abcdefghijklmnopqrstuvwxyz1234567890") for _ in range(50))
 
 # Routes
 @app.route("/")
@@ -22,10 +34,12 @@ def socket():
 @socketio.on("connect")
 def handle_connect():
     print("Client connected")
+
 @socketio.on("disconnect")
 def handle_disconnect():
     print("Client disconnected")
     return send_from_directory("../frontend", "index.html")
+
 @socketio.on("message")
 def handle_message(message):
     print("received message: " + message)
@@ -37,22 +51,23 @@ def handle_message(message):
         case "game_score":
             pass
 
-
-
 # Static files
 @app.route("/css/<path:path>")
 def send_css(path):
     return send_from_directory("../frontend/css", path)
+
 @app.route("/js/<path:path>")
 def send_js(path):
     return send_from_directory("../frontend/js", path)
+
 @app.route("/img/<path:path>")
 def send_img(path):
     return send_from_directory("../frontend/img", path)
+
 @app.route("/fonts/<path:path>")
 def send_font(path):
     return send_from_directory("../frontend/fonts", path)
 
 if __name__ == "__main__":
-    # app.run("0.0.0.0", 8080, debug=True)
+    # run
     socketio.run(app, host="0.0.0.0", port=8080, debug=True)
