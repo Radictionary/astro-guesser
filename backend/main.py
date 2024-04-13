@@ -45,9 +45,9 @@ def signup():
 @app.route("/profile")
 def profile():
     return "Profile"
-@app.route("/gamewindow")
-def game_window():
-    return send_from_directory("../frontend", "gamewindow.html")
+# @app.route("/gamewindow")
+# def game_window():
+#     return send_from_directory("../frontend", "gamewindow.html")
 
 
 # SocketIO events
