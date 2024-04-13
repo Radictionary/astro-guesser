@@ -8952,7 +8952,9 @@ a.hover-hide .hover-content,
 .navbar-collapse.collapse.show,
 .navbar-light a.nav-link,
 img {
-  transition: all 0.5s ease-in-out 0s; }
+  transition: all 0.5s ease-in-out 0s; 
+  border-radius: 5rem;
+}
 
 .transform-scale:hover {
   transform: scale(1.5, 1.5); }

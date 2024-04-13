@@ -7,27 +7,34 @@
     - SocketIO: A protocol that allows for real-time communication between the client and the server.
 
 """
-
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO, emit
 import json
 import data
+import random
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
 # Random secret key -- upgrade for production
-import random
 app.secret_key = ''.join(random.choice("abcdefghijklmnopqrstuvwxyz1234567890") for _ in range(50))
 
 # Routes
 @app.route("/")
 def index():
     return send_from_directory("../frontend", "index.html")
-
-@app.route("/socket")
-def socket():
-    return send_from_directory("../frontend", "socket.html")
+@app.route("/game_selector")
+def game_selector():
+    return send_from_directory("../frontend", "game_selector.html")
+@app.route("/ws_test")
+def ws_test():
+    return send_from_directory("../frontend", "ws_test.html")
+@app.route("/login")
+def login():
+    return send_from_directory("../frontend", "login.html")
+@app.route("/signup")
+def signup():
+    return send_from_directory("../frontend", "signup.html")
 
 
 # SocketIO events
@@ -50,6 +57,7 @@ def handle_message(message):
             emit("message", json.dumps({"label": "question", "data": data.get_random_data()}))
         case "game_score":
             pass
+
 
 # Static files
 @app.route("/css/<path:path>")
