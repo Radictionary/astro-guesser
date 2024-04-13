@@ -1,6 +1,10 @@
 from flask import Flask, send_from_directory
+from flask_socketio import SocketIO, emit
+import socket
+import json
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 
 # Routes
@@ -8,9 +12,32 @@ app = Flask(__name__)
 def index():
     return send_from_directory("../frontend", "index.html")
 
-@app.route("/content")
-def content():
-    return "hi"
+@app.route("/socket")
+def socket():
+    return send_from_directory("../frontend", "socket.html")
+
+
+# SocketIO events
+@socketio.on("connect")
+def handle_connect():
+    print("Client connected")
+@socketio.on("disconnect")
+def handle_disconnect():
+    print("Client disconnected")
+    return send_from_directory("../frontend", "index.html")
+@socketio.on("message")
+def handle_message(message):
+    print("received message: " + message)
+    emit("message", message)
+    message = json.loads(message)
+    print(message["label"])
+    match message["label"]:
+        case "need_data":
+            #send data
+            pass
+
+
+
 
 # Static files
 @app.route("/css/<path:path>")
@@ -27,4 +54,5 @@ def send_font(path):
     return send_from_directory("../frontend/fonts", path)
 
 if __name__ == "__main__":
-    app.run("0.0.0.0", 8080, debug=True)
+    # app.run("0.0.0.0", 8080, debug=True)
+    socketio.run(app, host="0.0.0.0", port=8080, debug=True)
