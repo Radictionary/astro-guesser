@@ -18,15 +18,23 @@
 
 
   <script>
-    function redirectToSignUp(){
-      window.location.href = "signup.html";
-    }
+    const socket = io.connect('ws://' + location.host + '/');
 
+    function displayInfo(data) {
+    var infoElement = document.getElementById('nebula-info');
+    infoElement.innerHTML = `
+      <p>name: ${data.name}</p>
+      <p>title: ${data.title}</p>
+      <p>ra: ${data.ra}</p>
+      <p>distance: ${data.distance}</p>
+      <p>image_filename: ${data.image_filename}</p>
+    `;
+  }
     window.addEventListener("load", function() {
     socket.emit("need_question")
     socket.on('message', (ev) => {
-            
-        });
+      displayInfo(ev);
+    });
   });
 
 
@@ -69,7 +77,13 @@
             </main>
           </div>
           
+<<<<<<< HEAD
             <div class="col-12 col-md-5 col-lg-6 col-xl-7 gradient">
+=======
+            <div class="col-12 col-md-5 col-lg-6 col-xl-7 gradient" id="nebula-info">
+              <img src="img/rocket.svg" alternate="nebula-question">
+              
+>>>>>>> ec03fa25a27a54fa9d29750884d839ae7fe05e41
             </div>
           
         </div>
