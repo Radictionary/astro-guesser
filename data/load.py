@@ -76,7 +76,7 @@ def process_row(index, row):
     json_filename = f'json_{index}.json'
     json_path = os.path.join(output_folder, json_filename)
     with open(json_path, 'w') as json_file:
-        json.dump(json_string, json_file)
+        json.dump(json_string, json_file, indent=2)
 
 # Iterate over each row in the combined dataframe
 for index, row in combined_df.iterrows():
