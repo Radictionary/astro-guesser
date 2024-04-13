@@ -40,7 +40,8 @@
 
   <script>
     const socket = io.connect('ws://' + location.host + '/');
-
+    var round = 1
+    var score = 0
     function displayInfo(data) {
       //   var infoElement = document.getElementById('nebula-info');
       //   infoElement.innerHTML = `
@@ -53,7 +54,7 @@
       document.getElementById("image").innerHTML = `<img src="/img/processed/${data.image_filename}" style="height: 20rem;max-width: 100rem; border-radius: 1%;" id="image">`
       document.getElementById("loader").style.display = "none";
     }
-    window.addEventListener("load", function () {
+    function fetching_question() {
       console.log("emmiting")
       socket.emit("message", JSON.stringify({ label: 'fetch_question' }))
       socket.on('message', (ev) => {
@@ -63,9 +64,20 @@
         console.log("ok:", message.payload)
         displayInfo(message.payload)
       });
+    }
+    window.addEventListener("load", function () {
+      fetching_question()
     });
 
-
+    function submitGuess() {
+      //guessing code
+      round ++
+      if (round > 5){
+        alert("Game Over.Your score is:", score)
+        return
+      }
+      fetching_question()
+    }
   </script>
 
 </head>
@@ -101,19 +113,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-12"> <button type="submit" class="btn btn-white btn-xl mt-1">Submit Guess</button> </div>
+            <div class="col-12"> <button type="submit" class="btn btn-white btn-xl mt-1" onclick="submitGuess()">Submit Guess</button> </div>
           </form>
 
         </main>
       </div>
-      <div class="col-12 col-md-5 col-lg-6 col-xl-7 gradient" id="nebula-info">
-        <img src="https://stsci-opo.org/STScI-01H8PJ6083PCF4KJ1AYKVVRX8Q.png"
-          style="width: 61rem; height: 60rem; margin: -2rem; object-fit: cover; object-position: center; border-radius: 2rem;"
-          alt="">
-      </div>
-    </div>
-
-  </div>
-</body>
-
-</html>
+      <div class="col-12 col-md-5 co
