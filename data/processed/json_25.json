@@ -1,1 +1,7 @@
-{"name": "IRAS 04022-4329, NGC 1512", "title": "Individual colour images - 4 (WFPC2, 659 nm)", "ra": 4.065055555555555, "distance": 40000000.0, "image_filename": "image_25.png"}
+{
+  "name": "IRAS 09293+2143, NGC 2903",
+  "title": "Star Clusters and Circumnuclear Ring in the Centre of NGC 2903 (NICMOS)",
+  "ra": 9.536069444444445,
+  "distance": 30000000.0,
+  "image_filename": "image_25.png"
+}

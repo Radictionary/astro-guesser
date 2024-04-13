@@ -41,8 +41,21 @@ def random_valid_index():
         random_number = random.randint(1, max_number)
     return random_number
 
+def random_other_three_titles(index):
+    others = [random_valid_index() for _ in range(3)]
+    while index in others:
+        others = [random_valid_index() for _ in range(3)]
+    titles = []
+    for other in others:
+        titles.append(load_json(other)["title"])
+    return titles
+
 def get_random_data():
-    return load_json(random_valid_index())
+    index = random_valid_index()
+    data = load_json(index)
+    others = random_other_three_titles(index)
+    data["other_three"] = others
+    return data
 
 if __name__ == "__main__":
     print("Maximum index:", max_number)

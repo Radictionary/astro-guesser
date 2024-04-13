@@ -5,6 +5,7 @@ import json
 folder_path = './parquet'
 # folder_path = "WRONG"
 parquet_files = [file for file in os.listdir(folder_path) if file.endswith('.parquet')]
+total = 0
 
 dataframes = []
 for file in parquet_files:
@@ -80,8 +81,10 @@ def process_row(index, row):
 
 # Iterate over each row in the combined dataframe
 for index, row in combined_df.iterrows():
-    try:
-        process_row(index, row)
-    except Exception as e:
-        print(f"Error processing row {index}: {e}")
-        continue
+    if total <= 15:
+        try:
+            process_row(index, row)
+            total += 1
+        except Exception as e:
+            print(f"Error processing row {index}: {e}")
+            continue
