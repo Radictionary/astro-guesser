@@ -1,3 +1,0 @@
-
-def whatever():
-    return "whatever"

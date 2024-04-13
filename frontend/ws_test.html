@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Flask-Sock Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
+</head>
+
+<body>
+    <h1>Flask-Sock Demo</h1>
+    <div id="log"></div>
+    <br>
+    <form id="form">
+        <label for="text">Input: </label>
+        <input type="text" id="text">
+    </form>
+    <script>
+        const log = (text, color) => {
+            document.getElementById('log').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
+        };
+
+        const socket = io.connect('ws://' + location.host + '/');
+        const textField = document.getElementById('text');
+        socket.on('message', (ev) => {
+            console.log("it is:", ev)
+            log('<<< ' + ev, 'blue');
+        });
+        document.getElementById('form').onsubmit = ev => {
+            ev.preventDefault();
+            log('>>> ' + textField.value, 'red');
+            console.log(textField.value)
+            socket.emit("message", textField.value);
+            textField.value = '';
+        };
+    </script>
+</body>
+
+</html>
