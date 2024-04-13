@@ -35,7 +35,6 @@ def get_random_data():
     return load_json(random_valid_index())
 
 if __name__ == "__main__":
-    print("Hello from data.py!")
     print("Maximum index:", max_number)
     print("Data exists for 1?", data_exists(1))
     print("Data exists for 100?", data_exists(100))
