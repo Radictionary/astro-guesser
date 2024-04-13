@@ -17,15 +17,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
 
   <script>
-    let currentRound = 1;
-    function updateRound() {
-    location.assign("/gamewindow");
-    document.getElementById('round').innerText = currentRound;
-  }
+  
+  let currentRound = 1;
+  let round_number = currentRound.toString();
 
   function nextRound() {
+
     currentRound++; // Increment the round number
+    // location.assign("/gamewindow" + currentRound);
+    document.getElementById('round').innerText = "Round: " + round_number;
+
+    console.log(currentRound)
     updateRound(); // Update the displayed round number
+
   }
     const socket = io.connect('ws://' + location.host + '/');
 
@@ -80,7 +84,9 @@
         <img src="/frontend/img/universemapv2.jpg" style="height: 30rem; border-radius: 1%;">
         </div>
 </div>
-<div class="col-12"> <button type="submit" class="btn btn-white btn-xl mt-1" onclick="nextRound()">Submit Guess</button> </div>
+<span class="h5 text-secondary fw-lighter" id="round">Round: </span>
+<div class="col-12"> <button type="submit" class="btn btn-white btn-xl mt-1" onclick="nextRound()">Submit Guess</button>
+</div>
 </form>
 
             </main>
