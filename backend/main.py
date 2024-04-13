@@ -1,8 +1,11 @@
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO, emit
+import socket
+import json
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+
 
 # Routes
 @app.route("/")
@@ -26,6 +29,14 @@ def handle_disconnect():
 def handle_message(message):
     print("received message: " + message)
     emit("message", message)
+    message = json.loads(message)
+    print(message["label"])
+    match message["label"]:
+        case "need_data":
+            #send data
+            pass
+
+
 
 
 # Static files
