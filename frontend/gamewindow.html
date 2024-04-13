@@ -18,15 +18,21 @@
 
 
   <script>
-    let currentRound = 1;
-    function updateRound() {
-    location.assign("/gamewindow");
-    document.getElementById('round').innerText = currentRound;
-  }
+    function updateURLParams() {
+    // Get the current URL
+    var url = new URL(window.location.href);
+    
+    // Get the current value of the 'rounds' parameter
+    var currentRounds = parseInt(url.searchParams.get('rounds')) || 1;
 
-  function nextRound() {
-    currentRound++; // Increment the round number
-    updateRound(); // Update the displayed round number
+    // Increment the rounds
+    var newRounds = currentRounds + 1;
+
+    // Update the 'rounds' parameter in the URL
+    url.searchParams.set('rounds', newRounds);
+
+    // Redirect to the updated URL
+    window.location.href = url.toString();
   }
     const socket = io.connect('ws://' + location.host + '/');
 
@@ -89,10 +95,6 @@
           
             <div class="col-12 col-md-5 col-lg-6 col-xl-7 gradient" id="nebula-info">
               <img src="img/rocket.svg" alternate="nebula-question">
-<<<<<<< HEAD
-              
-=======
->>>>>>> refs/remotes/origin/main
             </div>
           
         </div>
