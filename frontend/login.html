@@ -15,6 +15,11 @@
   <title>Register a new account</title>
   <link rel="stylesheet" href="css/theme.min.css">
 
+  <script>
+    function redirectToSignUp(){
+      window.location.href = "signup.html";
+    }
+  </script>
 
   </head>
 
@@ -51,7 +56,11 @@
   </div>
 
   <button type="submit" class="btn btn-white btn-xl mb-4">Login</button>
+
+  <button class="btn btn-white btn-xl mb-4" onclick="redirectToSignUp()" type="button">Sign Up</button>
+
 </div>
+
 </form>
 
             </main>
