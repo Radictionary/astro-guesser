@@ -1,3 +1,13 @@
+"""
+    This script is responsible for loading the data from the processed folder. It contains the following functions:
+    - data_exists(number): checks if a json file exists for a given number
+    - load_json(index): loads the json file for a given index
+    - random_valid_index(): returns a random index for which a json file exists
+    - get_random_data(): returns the data for a random index
+
+    The script also contains a main block that demonstrates the usage of the functions.
+"""
+
 import os
 import random
 import json

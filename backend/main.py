@@ -4,6 +4,10 @@ from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 socketio = SocketIO(app)
 
+# Random secret key -- upgrade for production
+import random
+app.secret_key = ''.join(random.choice("abcdefghijklmnopqrstuvwxyz") for _ in range(32))
+
 # Routes
 @app.route("/")
 def index():
