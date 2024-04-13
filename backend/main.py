@@ -7,8 +7,10 @@
     - SocketIO: A protocol that allows for real-time communication between the client and the server.
 
 """
+
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO, emit
+from flask_sqlalchemy import SQLAlchemy
 import json
 import data
 import random
@@ -17,7 +19,9 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 # Random secret key -- upgrade for production
-app.secret_key = ''.join(random.choice("abcdefghijklmnopqrstuvwxyz1234567890") for _ in range(50))
+app.config['SECRET_KEY'] = ''.join(random.choice("abcdefghijklmnopqrstuvwxyz1234567890") for _ in range(50))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+db = SQLAlchemy(app)
 
 # Routes
 @app.route("/")
@@ -35,6 +39,9 @@ def login():
 @app.route("/signup")
 def signup():
     return send_from_directory("../frontend", "signup.html")
+@app.route("/profile")
+def profile():
+    return "Profile"
 
 
 # SocketIO events
