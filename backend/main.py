@@ -11,6 +11,7 @@
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO, emit
 import json
+import data
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -44,10 +45,10 @@ def handle_message(message):
     print("received message: " + message)
     emit("message", message)
     message = json.loads(message)
-    print(message["label"])
     match message["label"]:
         case "need_data":
-            #send data
+            emit("message", json.dumps({"label": "question", "data": data.get_random_data()}))
+        case "game_score":
             pass
 
 # Static files
