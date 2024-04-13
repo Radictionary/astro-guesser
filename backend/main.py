@@ -30,6 +30,9 @@ def index():
 @app.route("/game_selector")
 def game_selector():
     return send_from_directory("../frontend", "game_selector.html")
+@app.route("/game_window")
+def game_window():
+    return send_from_directory("../frontend", "game_window.html")
 @app.route("/ws_test")
 def ws_test():
     return send_from_directory("../frontend", "ws_test.html")
@@ -42,9 +45,9 @@ def signup():
 @app.route("/profile")
 def profile():
     return "Profile"
-@app.route("/gamewindow")
-def game_window():
-    return send_from_directory("../frontend", "gamewindow.html")
+# @app.route("/gamewindow")
+# def game_window():
+#     return send_from_directory("../frontend", "gamewindow.html")
 
 
 # SocketIO events
@@ -63,8 +66,9 @@ def handle_message(message):
     emit("message", message)
     message = json.loads(message)
     match message["label"]:
-        case "need_data":
-            emit("message", json.dumps({"label": "question", "data": data.get_random_data()}))
+        case "fetch_question":
+            print("got fetch question")
+            emit("message", json.dumps({"label": "question", "payload": data.get_random_data()}))
         case "game_score":
             pass
 
