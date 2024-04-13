@@ -22,7 +22,8 @@
         const socket = io.connect('ws://' + location.host + '/');
         const textField = document.getElementById('text');
         socket.on('message', (ev) => {
-            log('<<< ' + ev.data, 'blue');
+            console.log("it is:", ev)
+            log('<<< ' + ev, 'blue');
         });
         document.getElementById('form').onsubmit = ev => {
             ev.preventDefault();
