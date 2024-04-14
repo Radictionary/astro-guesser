@@ -30,7 +30,7 @@ def index():
 @app.route("/game_selector")
 def game_selector():
     return send_from_directory("../frontend", "game_selector.html")
-@app.route("/gamewindow")
+@app.route("/game_window")
 def game_window():
     return send_from_directory("../frontend", "game_window.html")
 @app.route("/ws_test")
@@ -45,9 +45,7 @@ def signup():
 @app.route("/profile")
 def profile():
     return "Profile"
-# @app.route("/gamewindow")
-# def game_window():
-#     return send_from_directory("../frontend", "gamewindow.html")
+
 
 
 # SocketIO events

@@ -55,8 +55,6 @@ def get_random_data():
     data = load_json(index)
     others = random_other_three_titles(index)
     data["other_three"] = others
-    data["ra"] = 360 / 24 * data["ra"]
-    data["distance"] = data["distance"] / 100_000 * 500
     return data
 
 if __name__ == "__main__":
