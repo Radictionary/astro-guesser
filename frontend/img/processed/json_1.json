@@ -1,1 +1,7 @@
-{"name": "CRL 618, Westbrook Nebula", "title": "Stellar cocoon CRL 618", "ra": 4.714872222222223, "distance": 3000.0, "image_filename": "image_1.png"}
+{
+  "name": "IRAS 11559+4413, NGC 4013",
+  "title": "NICMOS finds a golden ring at the heart of a galaxy (NICMOS image)",
+  "ra": 11.975325,
+  "distance": 60000000.0,
+  "image_filename": "image_1.png"
+}

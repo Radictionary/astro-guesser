@@ -1,1 +1,7 @@
-{"name": "IRAS 04022-4329, NGC 1512", "title": "Composite ultraviolet-visible-infrared image of NGC 1512", "ra": 4.065052777777778, "distance": 40000000.0, "image_filename": "image_21.png"}
+{
+  "name": "Stephan's Quintet",
+  "title": "Stephan's Quintet - A mammoth cosmic collision (Hubble view)",
+  "ra": 22.60135,
+  "distance": 300000000.0,
+  "image_filename": "image_21.png"
+}
